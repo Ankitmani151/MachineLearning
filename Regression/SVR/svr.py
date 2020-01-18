@@ -10,10 +10,6 @@ dataset = pd.read_csv('Position_Salaries.csv')
 X = dataset.iloc[:, 1:2].values
 y = dataset.iloc[:, 2].values
 
-# Splitting the dataset into the Training set and Test set
-"""from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)"""
-
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
@@ -27,8 +23,8 @@ regressor = SVR(kernel = 'rbf')
 regressor.fit(X, y)
 
 # Predicting a new result
-#we need to do feature scaling using transform function for 6.5 before predection
-#to get the valuue we need ti inverse the transform after predection
+#we need to do feature scaling using transform function for 6.5 before predection (sc_X.transform)
+#To get the value we need to inverse the transform after predection(sc_y.inverse_transform)
 y_pred = sc_y.inverse_transform(regressor.predict(sc_X.transform(np.array([[6.5]]))))
 
 # Visualising the SVR results
